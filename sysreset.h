@@ -8,5 +8,6 @@
 #define sysreset_h
 
 void sysreset();
+void power_off();
 
 #endif

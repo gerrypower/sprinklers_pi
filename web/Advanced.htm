@@ -28,12 +28,25 @@
             });
         }
         function resetSystem() {
-          if (confirm('Are you sure you want to Reset?'))
+          if (confirm('Are you sure you want to restart?'))
             $.ajax({
               type: 'get',
               url: 'bin/reset',
               success: function (d) {
-                alert('System Resetting');
+                alert('System restarting');
+              },
+              error: function (xhr, st, e) {
+                alert(st);
+              }
+            });
+        }
+        function powerOff() {
+          if (confirm('Are you sure you want to power off?'))
+            $.ajax({
+              type: 'get',
+              url: 'bin/power_off',
+              success: function (d) {
+                alert('System powering off');
               },
               error: function (xhr, st, e) {
                 alert(st);
@@ -51,7 +64,9 @@
         <ul data-role="listview" data-divider-theme="b" data-inset="true" data-split-theme="b">
           <li data-theme="c"><a href="WCheck.htm" data-transition="slide">WUnderground Diagnostics</a>
           </li>
-          <li data-theme="c"><a href="javascript:resetSystem()">Reset System</a>
+          <li data-theme="c"><a href="javascript:resetSystem()">Restart</a>
+          </li>
+          <li data-theme="c"><a href="javascript:powerOff()">Power off</a>
           </li>
           <li data-theme="c"><a href="javascript:factoryDefaults()">Factory Defaults</a>
           </li>

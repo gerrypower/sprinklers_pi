@@ -748,6 +748,7 @@ void web::ProcessWebClients()
 	if (client)
 	{
 		bool bReset = false;
+		bool bPower_off = false;
 #ifdef ARDUINO
 		FILE stream_file;
 		FILE * pFile = &stream_file;
@@ -855,6 +856,11 @@ void web::ProcessWebClients()
 				ServeHeader(pFile, 200, "OK", false);
 				bReset = true;
 			}
+			else if (strcmp(sPage, "bin/power_off") == 0)
+			{
+				ServeHeader(pFile, 200, "OK", false);
+				bPower_off = true;
+			}
 			else if (strcmp(sPage, "json/schedules") == 0)
 			{
 				JSONSchedules(key_value_pairs, pFile);
@@ -944,6 +950,8 @@ void web::ProcessWebClients()
 
 		if (bReset)
 			sysreset();
+		else if (bPower_off)
+			power_off();
 	}
 }
 

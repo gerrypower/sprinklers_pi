@@ -10,13 +10,16 @@
 /////////////////////////////
 //  Linux Code
 //
-#include <sys/reboot.h>
 #include <stdlib.h>
 
 void sysreset()
 {
-	reboot(RB_AUTOBOOT);
-	exit(0);
+    system("reboot");
+}
+
+void power_off()
+{
+	system("poweroff");
 }
 
 #else
@@ -43,6 +46,11 @@ void sysreset()
         //wdt_enable(WDTO_120MS);
         //while(1) {};
         asm volatile ("  jmp 0");
+}
+
+void power_off()
+{
+	TODO: Does arduino have a poweroff?
 }
 
 #endif
